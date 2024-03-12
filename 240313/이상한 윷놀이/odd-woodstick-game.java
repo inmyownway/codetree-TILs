@@ -1,3 +1,5 @@
+package ssafy;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -83,7 +85,10 @@ public class Main {
         {
             round++;
             //System.out.println("round: "+round);
-            if(round==1000) break;
+            if(round>1000) {
+
+             round=-1;   break;
+            }
 
 
             // 같은 층에있는거 확인하기
@@ -122,8 +127,11 @@ public class Main {
                     nx=node[idx].x+dx[node[idx].dir];
                     ny= node[idx].y+dy[node[idx].dir];
                 }
-
-             //   System.out.println(nx+" "+ny);
+                if(!isBoundary(nx,ny)|| board[nx][ny]==2)
+                {
+                    continue;
+                }
+             //  System.out.println(nx+" "+ny);
                 // 흰색이니까
                 if(board[nx][ny]==0)
                 {
