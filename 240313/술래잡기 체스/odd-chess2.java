@@ -64,6 +64,7 @@ public class Main {
         int td= fish.get(0).dir;
         fish.get(0).x=-1;
         fish.get(0).y=-1;
+        //fish.get(0).dir=-1;
 
         int score= fish.get(0).num;
        Collections.sort(fish);
@@ -75,7 +76,7 @@ public class Main {
     }
     public static void dfs(int cx,int cy,int cd,ArrayList<Fish> fishes,int s)
     {
-        ArrayList<Fish> tempFish =fishes;
+        ArrayList<Fish> tempFish =new ArrayList<>(fishes);
 
         for(Fish f:tempFish)
         {
@@ -152,36 +153,31 @@ public class Main {
             int currentY=cy;
 
 
-            currentX+= dx[cd]*c;
-            currentY+=dy[cd]*c;
-            // 애를 먹을거임
 
-            boolean flag= false;
+            currentX+= dx[cd]*c;
+            currentY+= dy[cd]*c;
+
             if(isBoundary(currentX,currentY))
             {
                 for(Fish q: tempFish)
                 {
-                    // 누군가 있는경우
-                    if(currentX== q.x && currentY==q.y)
+                    if(currentX==q.x && currentY ==q.y)
                     {
-                        //System.out.println(q.x+" " +q.y);
-                        int newX=q.x;
-                        int newY=q.y;
-                        int newDir= q.dir;
-
+                        // 같은거 찾았으니까
+                        int qd= q.dir;
                         q.x=-1;
                         q.y=-1;
-                        flag=true;
-                        dfs(newX,newY,newDir,tempFish,s+q.num);
-                        break;
 
+                        dfs(currentX,currentY,qd,tempFish,s+q.num);
                     }
                 }
             }
-            if(flag==false)
+            else
             {
-             answer=Math.max(answer,s);
+                answer=Math.max(answer,s);
             }
+
+
         }
 
        // System.out.println("end");
