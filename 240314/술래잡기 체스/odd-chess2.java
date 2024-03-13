@@ -64,24 +64,18 @@ public class Main {
         int td= fish.get(0).dir;
         fish.get(0).x=-1;
         fish.get(0).y=-1;
-        //fish.get(0).dir=-1;
 
         int score= fish.get(0).num;
-       Collections.sort(fish);
+        Collections.sort(fish);
 
-     //  print(fish);
-       // System.out.println();
+        //  print(fish);
+        // System.out.println();
         dfs(tx,ty,td,fish,score);
         System.out.println(answer);
     }
     public static void dfs(int cx,int cy,int cd,ArrayList<Fish> fishes,int s)
     {
-        ArrayList<Fish> tempFish =new ArrayList<>();
-        for(Fish a: fishes)
-        {
-            tempFish.add(a);
-        }
-        //=new ArrayList<>(fishes);
+        ArrayList<Fish> tempFish =fishes;
 
         for(Fish f:tempFish)
         {
@@ -92,24 +86,25 @@ public class Main {
             {
                 int nx= f.x+dx[(f.dir+i)%8];
                 int ny= f.y+dy[(f.dir+i)%8];
-              //  System.out.println("i: "+i+" ("+nx+ ","+ny+")");
+                //  System.out.println("i: "+i+" ("+nx+ ","+ny+")");
                 if(!isBoundary(nx,ny) || (nx==cx && ny==cy))
                 {
                     // 밖이거나 , 술래랑 같으면 반시계로 45도 돌ㄱ;
                     continue;
                 }
-               // System.out.println(nx+" "+ny);
+                // System.out.println(nx+" "+ny);
                 // 가려는 칸에 뭐가 있거나 없는지 확인
                 boolean isEmpty = true;
 
                 for(Fish check : tempFish)
                 {
-                  //  System.out.println("@ "+check);
+                    //  System.out.println("@ "+check);
                     if(check.num!=f.num)
                     {
                         if(check.x==nx && check.y==ny)
                         {
-
+                            //  System.out.println("true");
+                            // 가려는곳에 뭐가있으면 교환하기
 
                             check.x=f.x;
                             check.y=f.y;
@@ -123,73 +118,79 @@ public class Main {
 
                             flag=true;
                             isEmpty=false;
-
+                            // System.out.println(f);
+                            //System.out.println(check);
+                            //System.out.println(" ");
                             break;
                         }
                     }
 
 
 
-                    }
-                if(isEmpty)
+                } if(isEmpty)
             {
                 f.x=nx;
                 f.y=ny;
+                f.dir= (f.dir+i)%8;
+
+
                 flag=true;
                 break;
-                }
+            }
                 if(flag)
                     break;
             }
 
 
-          //  print(tempFish);
-          //  System.out.println();
-           // System.out.println();
+            //  print(tempFish);
+            //  System.out.println();
+            // System.out.println();
         }
 
 
         // 술래움직이기
-        for(int c=1;c<4;c++)
+        for(int c=1;c<5;c++)
         {
             int currentX= cx;
             int currentY=cy;
 
 
-
             currentX+= dx[cd]*c;
-            currentY+= dy[cd]*c;
+            currentY+=dy[cd]*c;
+            // 애를 먹을거임
 
+            boolean flag= false;
             if(isBoundary(currentX,currentY))
             {
                 for(Fish q: tempFish)
                 {
-                    if(currentX==q.x && currentY ==q.y)
+                    // 누군가 있는경우
+                    if(currentX== q.x && currentY==q.y)
                     {
-                        // 같은거 찾았으니까
-                        int qd= q.dir;
+                        //System.out.println(q.x+" " +q.y);
+                        int newX=q.x;
+                        int newY=q.y;
+                        int newDir= q.dir;
+
                         q.x=-1;
                         q.y=-1;
+                        flag=true;
+                        dfs(newX,newY,newDir,tempFish,s+q.num);
 
-
-                        dfs(currentX,currentY,qd,tempFish,s+q.num);
                         q.x=currentX;
                         q.y=currentY;
-
 
                     }
                 }
             }
-            else
+            if(flag==false)
             {
                 answer=Math.max(answer,s);
             }
-
-
         }
 
-       // System.out.println("end");
-       // System.out.println();
+        // System.out.println("end");
+        // System.out.println();
     }
 
     public static void print(ArrayList<Fish> fa)
