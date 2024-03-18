@@ -101,7 +101,7 @@ public class Main {
 //        {
 //            System.out.println(p);
 //        }
-////
+//
 //        for(Person p:person)
 //        {
 //
@@ -134,7 +134,7 @@ public class Main {
 ////                    }
 ////                    System.out.println();
 ////                }*/
-//           / System.out.println("넘버");
+//            System.out.println("넘버");
 //            for(int q=0;q<N;q++)
 //            {
 //                for(int w=0;w<N;w++)
@@ -143,7 +143,7 @@ public class Main {
 //                }
 //                System.out.println();
 //            }
-          //  System.out.println();
+//            System.out.println();
             if((person.size()==1 && person.get(0).num==0)|| time>=1000)
             {
                 if(time==1000)
@@ -163,13 +163,9 @@ public class Main {
             deleteDuplicate();
             t();
             stayK();
-       //     print();
+            //print();
 
 
-//            if(time<10)
-//            {        System.out.println(time);
-//                print();
-//            }
             //print();
         time++;
         }
@@ -216,14 +212,15 @@ public class Main {
                 int nx = p.x+dx[p.d[currnetDir][idx]];
                 int ny = p.y+dy[p.d[currnetDir][idx]];
 
-
-
+//                System.out.println(p);
+//                System.out.println(Arrays.toString(p.d[p.dir]));
+//                System.out.println(nx+" "+ny);
                 if(isBoundary(nx,ny)&& board[nx][ny][1]==0)
                 {
 
                     p.x=nx;
                     p.y=ny;
-                    p.dir=idx;
+                    p.dir=p.d[p.dir][idx];
                     flag=true;
                     break;
                 }
@@ -242,7 +239,7 @@ public class Main {
                 {
                     p.x=nx;
                     p.y=ny;
-                    p.dir=idx;
+                    p.dir=p.d[p.dir][idx];
                     flag=true;
                     break;
                 }
@@ -303,12 +300,12 @@ public class Main {
     {
         return x>=0 && x<N && y>=0 && y<N;
     }
-//    public static void print()
-//    {
-//        for(Person p : person)
-//        {
-//            System.out.println(p);
-//        }
-//    }
+    public static void print()
+    {
+        for(Person p : person)
+        {
+            System.out.println(p);
+        }
+    }
 
 }
