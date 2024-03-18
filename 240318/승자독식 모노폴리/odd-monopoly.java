@@ -101,7 +101,7 @@ public class Main {
 //        {
 //            System.out.println(p);
 //        }
-//
+////
 //        for(Person p:person)
 //        {
 //
@@ -124,8 +124,26 @@ public class Main {
 //        }
         while(true)
         {
-            //System.out.println("time "+ (time+1));
-
+//            System.out.println("time "+ (time+1));
+//            System.out.println("남은거");
+////        /*                  for(int q=0;q<N;q++)
+////                {
+////                    for(int w=0;w<N;w++)
+////                    {
+////                        System.out.print(board[q][w][0]+" ");
+////                    }
+////                    System.out.println();
+////                }*/
+//           / System.out.println("넘버");
+//            for(int q=0;q<N;q++)
+//            {
+//                for(int w=0;w<N;w++)
+//                {
+//                    System.out.print(board[q][w][1]+" ");
+//                }
+//                System.out.println();
+//            }
+          //  System.out.println();
             if((person.size()==1 && person.get(0).num==0)|| time>=1000)
             {
                 if(time==1000)
@@ -145,27 +163,14 @@ public class Main {
             deleteDuplicate();
             t();
             stayK();
-           // print();
-          //  System.out.println("남은거");
-//        /*                    for(int q=0;q<N;q++)
-//                {
-//                    for(int w=0;w<N;w++)
-//                    {
-//                        System.out.print(board[q][w][0]+" ");
-//                    }
-//                    System.out.println();
-//                }*/
-           // System.out.println("넘버");
-//                            for(int q=0;q<N;q++)
-//                {
-//                    for(int w=0;w<N;w++)
-//                    {
-//                        System.out.print(board[q][w][1]+" ");
-//                    }
-//                    System.out.println();
-//                }
-//            System.out.println();
+       //     print();
 
+
+//            if(time<10)
+//            {        System.out.println(time);
+//                print();
+//            }
+            //print();
         time++;
         }
         System.out.println(answer);
@@ -212,19 +217,13 @@ public class Main {
                 int ny = p.y+dy[p.d[currnetDir][idx]];
 
 
-//                for(int q=0;q<N;q++)
-//                {
-//                    for(int w=0;w<N;w++)
-//                    {
-//                        System.out.print(board[q][w][1]+" ");
-//                    }
-//                    System.out.println();
-//                }
+
                 if(isBoundary(nx,ny)&& board[nx][ny][1]==0)
                 {
-                //    System.out.println(nx+" "+ny+" "+board[nx][ny][1]);
+
                     p.x=nx;
                     p.y=ny;
+                    p.dir=idx;
                     flag=true;
                     break;
                 }
@@ -243,6 +242,7 @@ public class Main {
                 {
                     p.x=nx;
                     p.y=ny;
+                    p.dir=idx;
                     flag=true;
                     break;
                 }
@@ -303,12 +303,12 @@ public class Main {
     {
         return x>=0 && x<N && y>=0 && y<N;
     }
-    public static void print()
-    {
-        for(Person p : person)
-        {
-            System.out.println(p);
-        }
-    }
+//    public static void print()
+//    {
+//        for(Person p : person)
+//        {
+//            System.out.println(p);
+//        }
+//    }
 
 }
