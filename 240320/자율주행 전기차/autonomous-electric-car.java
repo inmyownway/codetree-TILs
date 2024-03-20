@@ -74,7 +74,7 @@ public class Main {
                 }
             }
         }
-     
+
 
         st=new StringTokenizer(bf.readLine());
         NX=Integer.parseInt(st.nextToken())-1;
@@ -103,6 +103,11 @@ public class Main {
             int[] info = findNearPerson();
             int personIdx = info[0];
             int d = info[1];
+            if(d==0)
+            {
+                answer=-1;
+                break;
+            }
 
 
             if(C-d<0)
@@ -128,6 +133,7 @@ public class Main {
             person.remove(personIdx);
 
         }
+
 
         System.out.println(answer);
     }
