@@ -43,8 +43,12 @@ public class Main {
 
         @Override
         public int compareTo(Person o) {
-            return this.sx-o.sx;
+            if (this.sx == o.sx) {
+                return Integer.compare(this.sy, o.sy);
+            }
+            return Integer.compare(this.sx, o.sx);
         }
+
     }
     public static void main(String[] args) throws IOException{
 
@@ -152,7 +156,7 @@ public class Main {
 
         int minD=Integer.MAX_VALUE;
         int idx=0;
-       //Collections.sort(person);
+       Collections.sort(person);
 
         for(int i=0;i<person.size();i++)
         {
