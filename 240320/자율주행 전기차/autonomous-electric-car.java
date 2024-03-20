@@ -13,8 +13,8 @@ public class Main {
     static int[][] board;
     static int NX,NY;
     static ArrayList<Person> person;
-    static int[] dx ={0,0,-1,1};
-    static int[] dy ={1,-1,0,0};
+    static int[] dx ={0,-1,0,1};
+    static int[] dy ={-1,0,1,0};
     static int answer;
     static boolean[][] v;
     public static class Person implements Comparable<Person>
@@ -123,6 +123,7 @@ public class Main {
             NY=person.get(personIdx).sy;
 
             d = bfs(person.get(personIdx).ex,person.get(personIdx).ey);
+
             if(d==-1)
             {
                 answer=-1;
