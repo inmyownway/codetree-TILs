@@ -123,6 +123,12 @@ public class Main {
             NY=person.get(personIdx).sy;
 
             d = bfs(person.get(personIdx).ex,person.get(personIdx).ey);
+            if(d==-1)
+            {
+                answer=-1;
+                break;
+            }
+
             if(C-d<0)
             {
                 answer=-1;
