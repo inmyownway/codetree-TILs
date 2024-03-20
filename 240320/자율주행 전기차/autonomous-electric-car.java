@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -15,6 +16,7 @@ public class Main {
     static int[] dx ={0,0,-1,1};
     static int[] dy ={1,-1,0,0};
     static int answer;
+    static boolean[][] v;
     public static class Person implements Comparable<Person>
     {
         int sx;
@@ -72,6 +74,7 @@ public class Main {
                 }
             }
         }
+     
 
         st=new StringTokenizer(bf.readLine());
         NX=Integer.parseInt(st.nextToken())-1;
@@ -93,13 +96,14 @@ public class Main {
         {
             if(person.size()==0)
             {
-    answer=C;
+                answer=C;
                 break;
             }
 
             int[] info = findNearPerson();
             int personIdx = info[0];
             int d = info[1];
+
 
             if(C-d<0)
             {
@@ -157,56 +161,39 @@ public class Main {
     public static int bfs(int ax,int ay)
     {
 
-        int[][] tempBoard = new int[N][N];
+        int tx=NX;
+        int ty=NY;
+       v= new boolean[N][N];
 
-        for(int i=0;i<N;i++)
-        {
-            for(int j=0;j<N;j++)
-            {
-                tempBoard[i][j]=board[i][j];
-            }
-        }
+       v[tx][ty]=true;
 
-        boolean[][] v= new boolean[N][N];
+       Queue<int[]> q = new LinkedList<>();
+       q.add(new int[]{tx,ty,0});
 
-        Queue<int[]> q = new LinkedList<>();
+       int aa=0;
 
-        q.add(new int[]{NX,NY,0});
-        tempBoard[NX][NY]=1;
-        v[NY][NY]=true;
-        int num=0;
-        while(!q.isEmpty())
-        {
-            int[] now =q.poll();
+       while(!q.isEmpty())
+       {
+           int[] now = q.poll();
 
-            int nowx = now[0];
-            int nowy = now[1];
-            //System.out.println(nowx);
-            int cnt= now[2];
-            if(nowx==ax && nowy==ay)
-            {
-                num= now[2];
-                break;
-            }
+           if(now[0]==ax && now[1]==ay)
+           {
+               aa=now[2];
+               break;
+           }
+           for(int i=0;i<4;i++)
+           {
+               int nx= now[0]+dx[i];
+               int ny= now[1]+dy[i];
 
-
-            for(int i=0;i<4;i++)
-            {
-                int nx= nowx+dx[i];
-                int ny= nowy+dy[i];
-
-                if(isBoundary(nx,ny) && tempBoard[nx][ny]==0)
-                {
-                    q.add(new int[]{nx,ny,cnt+1});
-
-                    v[nx][ny]=true;
-                }
-            }
-
-
-
-        }
-return num;
+               if(isBoundary(nx,ny) && v[nx][ny]==false && board[nx][ny]==0)
+               {
+                   v[nx][ny]=true;
+                   q.add(new int[]{nx,ny,now[2]+1});
+               }
+           }
+       }
+return aa;
     }
     public static boolean isBoundary(int x,int y)
     {
