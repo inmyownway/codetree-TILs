@@ -17,7 +17,7 @@ public class Main {
     static int[] dy ={0,-1,1,0};
     static int answer;
     static boolean[][] v;
-    public static class Person implements Comparable<Person>
+    public static class Person //implements Comparable<Person>
     {
         int sx;
         int sy;
@@ -40,14 +40,14 @@ public class Main {
                     ", ey=" + ey +
                     '}';
         }
-
-        @Override
-        public int compareTo(Person o) {
-            if (this.sx == o.sx) {
-                return Integer.compare(this.sy, o.sy);
-            }
-            return Integer.compare(this.sx, o.sx);
-        }
+//
+//        @Override
+//        public int compareTo(Person o) {
+//            if (this.sx == o.sx) {
+//                return Integer.compare(this.sy, o.sy);
+//            }
+//            return Integer.compare(this.sx, o.sx);
+//        }
 
     }
     public static void main(String[] args) throws IOException{
@@ -156,7 +156,7 @@ public class Main {
 
         int minD=Integer.MAX_VALUE;
         int idx=0;
-       Collections.sort(person);
+   //    Collections.sort(person);
 
         for(int i=0;i<person.size();i++)
         {
