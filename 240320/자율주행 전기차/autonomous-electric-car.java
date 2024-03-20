@@ -13,8 +13,8 @@ public class Main {
     static int[][] board;
     static int NX,NY;
     static ArrayList<Person> person;
-    static int[] dx ={0,-1,0,1};
-    static int[] dy ={-1,0,1,0};
+    static int[] dx ={-1,0,0,1};
+    static int[] dy ={0,-1,1,0};
     static int answer;
     static boolean[][] v;
     public static class Person implements Comparable<Person>
@@ -152,7 +152,7 @@ public class Main {
 
         int minD=Integer.MAX_VALUE;
         int idx=0;
-        Collections.sort(person);
+       //Collections.sort(person);
 
         for(int i=0;i<person.size();i++)
         {
