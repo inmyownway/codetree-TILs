@@ -103,7 +103,9 @@ public class Main {
             int[] info = findNearPerson();
             int personIdx = info[0];
             int d = info[1];
-            if(d==0)
+
+
+            if(d==-1)
             {
                 answer=-1;
                 break;
@@ -184,8 +186,8 @@ public class Main {
 
            if(now[0]==ax && now[1]==ay)
            {
-               aa=now[2];
-               break;
+               return now[2];
+
            }
            for(int i=0;i<4;i++)
            {
@@ -199,7 +201,8 @@ public class Main {
                }
            }
        }
-return aa;
+        return -1;
+
     }
     public static boolean isBoundary(int x,int y)
     {
