@@ -116,7 +116,17 @@ public class Main {
             }
 
             int[] info = findNearPerson();
+            if(info[0]==-1)
+            {
+            	answer=-1;
+            	break;
+            }
             int personIdx=board[info[0]][info[1]];
+            if(personIdx==-1)
+            {
+            	answer=-1;
+            	break;
+            }
             for(int a=0;a<person.size();a++)
             {
             	if(person.get(a).num==board[info[0]][info[1]])
