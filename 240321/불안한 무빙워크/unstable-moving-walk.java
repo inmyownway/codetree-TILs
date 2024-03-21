@@ -57,8 +57,7 @@ public class Main {
                 break;
             }
            // System.out.println();
-            if(round==5)
-                break;
+
         }
 
 
@@ -98,12 +97,20 @@ public class Main {
         movingWalk.remove(movingWalk.size() - 1);
         movingWalk.addAll(0, temp);
 
-        for(int i=N-2;i>-1;i--)
+        for(int i=N-1;i>-1;i--)
         {
             if(personPos[i]==1)
             {
-                personPos[i]=0;
-                personPos[i+1]=1;
+                if(i==N-1)
+                {
+                    personPos[i]=0;
+                }
+                else
+                {
+                    personPos[i]=0;
+                    personPos[i+1]=1;
+                }
+
             }
 
         }
@@ -112,6 +119,7 @@ public class Main {
 
     private static boolean check()
     {
+        kCnt=0;
         for (int i = 0; i < N * 2; i++) {
             if (D[i] <= 0) {
                 kCnt++;
