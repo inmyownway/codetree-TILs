@@ -206,13 +206,9 @@ public class Main {
         }
 
 
-        routes.sort(new Comparator<int[]>() {
-
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                // TODO Auto-generated method stub
-                return Arrays.compare(o1, o2);
-            }
+        routes.sort((o1, o2) -> {
+            // TODO Auto-generated method stub
+            return Arrays.compare(o1, o2);
         });
 
 
