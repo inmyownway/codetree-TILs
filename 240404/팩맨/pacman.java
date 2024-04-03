@@ -232,26 +232,26 @@ public class Main {
 //            }
 //        });
 
-        Comparator<int[]> comparator = new Comparator<int[]>() {
-            @Override
-            public int compare(int[] arr1, int[] arr2) {
-                // 첫 번째 요소를 비교하여 오름차순으로 정렬
-                int result = Integer.compare(arr1[0], arr2[0]);
-                if (result != 0) {
-                    return result;
-                }
-
-                // 두 번째 요소를 비교하여 오름차순으로 정렬
-                result = Integer.compare(arr1[1], arr2[1]);
-                if (result != 0) {
-                    return result;
-                }
-
-                // 세 번째 요소를 비교하여 오름차순으로 정렬
-                return Integer.compare(arr1[2], arr2[2]);
-            }
-        };
-        Collections.sort(routes,comparator);
+//        Comparator<int[]> comparator = new Comparator<int[]>() {
+//            @Override
+//            public int compare(int[] arr1, int[] arr2) {
+//                // 첫 번째 요소를 비교하여 오름차순으로 정렬
+//                int result = Integer.compare(arr1[0], arr2[0]);
+//                if (result != 0) {
+//                    return result;
+//                }
+//
+//                // 두 번째 요소를 비교하여 오름차순으로 정렬
+//                result = Integer.compare(arr1[1], arr2[1]);
+//                if (result != 0) {
+//                    return result;
+//                }
+//
+//                // 세 번째 요소를 비교하여 오름차순으로 정렬
+//                return Integer.compare(arr1[2], arr2[2]);
+//            }
+//        };
+//        Collections.sort(routes,comparator);
        // System.out.println(maxEat);
 //        for(int[] a:routes)
 //        {
