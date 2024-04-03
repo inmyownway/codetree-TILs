@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Queue;
 import java.util.StringTokenizer;
+
 
 
 
@@ -51,8 +54,8 @@ public class Main {
 		M=Integer.parseInt(st.nextToken());
 		T=Integer.parseInt(st.nextToken());
 		st = new StringTokenizer(bf.readLine());
-		px=Integer.parseInt(st.nextToken());
-		py=Integer.parseInt(st.nextToken());
+		px=Integer.parseInt(st.nextToken())-1;
+		py=Integer.parseInt(st.nextToken())-1;
 		
 		
 		liveMonster= new ArrayList<>();
@@ -61,8 +64,9 @@ public class Main {
 		result= new int[3];
 		board= new int[4][4]; // 시체 확인용
 		monsterPosBoard= new int[4][4];
-		for(int i=0;i<M;i++)
+		for(int i=0;i<M;i++) 
 		{
+			
 			st= new StringTokenizer(bf.readLine());
 			int x=Integer.parseInt(st.nextToken())-1;
 			int y=Integer.parseInt(st.nextToken())-1;
@@ -72,39 +76,182 @@ public class Main {
 		}
 		
 		// 0 1 2 3 으로 중복 순열 만들어주기 
+		System.out.println("px py "+px+" "+py);
 		perm(0);
 		
 		printMonster(liveMonster);
 		for(int time=0;time<T;time++)
-		{
+		{			
+			
+			System.out.println("# "+time);
+		
+			System.out.println("몬스터 이동 후 ");
 			monsterCopyTry();
 			monsterMove();
-			System.out.println("# "+time);
 			printMonster(liveMonster);
-			System.out.println("egg");
-			printMonster(eggMonster);
-			printBoard(board);
+
+
 			
+			// 팩맨 이동 
 			packmanMove();
+			System.out.println("팩맨 이동 후 상황");
+			printMonster(liveMonster);
 			
+		
+			// 몬스터 시체 소멸
+			deadbody();
+			
+			// 몬스터 복제 
+			monsterCopyStart();
+			
+			System.out.println("턴 끝난후 상황");
+			printMonster(liveMonster);
 	
 		}
+		System.out.println(liveMonster.size());
+	}
+	private static void monsterCopyStart() {
+		
+		for(Monster m: eggMonster)
+		{
+			int x= m.x;
+			int y= m.y;
+			int d= m.d;
+			liveMonster.add(new Monster(x,y,d));
+			
+		}
+		eggMonster= new ArrayList<>();
+	}
+	private static void deadbody() {
+		
+		for(int i=0;i<4;i++)
+		{
+			for(int j=0;j<4;j++)
+			{
+				if(board[i][j]>=1)
+					board[i][j]-=1;
+			}
+		}
+		
 	}
 	private static void packmanMove() {
 		
+		// 상 좌 하 우 
 		int[] mx = {-1,0,1,0};
 		int[] my= {0,-1,0,1};
 		
 		int maxEat=-1;
 		
+		ArrayList<Integer> eatCount= new ArrayList<>();		
+		
+		System.out.println("팩맨위치: "+px+" "+py);
+		
+		
 		for(int[] move: moves)
 		{
-			// move는 이동 커맨드 
+			// move는 이동 커맨드 ex [0,1,2];
 			int sum=0;
+			int nx= px;
+			int ny = py;
+			boolean flag= false;
 			
+			
+		
+			for(int dir : move)
+			{
+				nx+=mx[dir];
+				ny+=my[dir];
+				
+				if(!isBoundary(nx, ny))
+					break;
+				
+				sum+=monsterPosBoard[nx][ny];
+				maxEat=Math.max(sum,maxEat);
+				
+			
+				
+			}
+			eatCount.add(sum);
 			
 		}
+
+		// 최대 먹이를 먹는 루트 ( 이거 나오면 sort해서 0번쨰가 조건에 맞는 루트임)
+		ArrayList<int[]> routes =new ArrayList<>();
+	
+		
+		
+		for(int i=0;i<64;i++)
+		{
+			if(eatCount.get(i)==maxEat)
+			{
+				routes.add(moves.get(i));
+				
+			}
+		}
+		
+		routes.sort(new Comparator<int[]>() {
+
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				// TODO Auto-generated method stub
+				return Arrays.compare(o1, o2);
+			}
+		});
+		
+
+	
+		
+		int[] route= routes.get(0);
+		
+		System.out.println(Arrays.toString(route));
+
+		// 몬스터 제거 ( 여기 루트에 있는 애들) 
+		
+		System.out.println("몬스터 제거 ");
+		int nx=px;
+		int ny=py;
+		
+		ArrayList<Monster> tempLiveMonster = new ArrayList<>();
+		
+		int[][] way= new int[3][2];
+		int rr=0;
+		for(int dir : route)
+		{
+			nx+=mx[dir];
+			ny+=my[dir];
+			
+			way[rr][0]=nx;
+			way[rr][1]=ny;
+		rr++;
+		}
+		
+		for(Monster m: liveMonster)
+		{
+			 if(
+				 !(m.x == way[0][0] && m.y== way[0][1])
+				 && 	 !(m.x == way[1][0] && m.y== way[1][1])
+				 && 	 !(m.x == way[2][0] && m.y== way[2][1])
+					 )
+			 {
+				 tempLiveMonster.add(m);
+			 }
+			 else
+			 {
+				 board[m.x][m.y]=3;
+			 }
+		}
+			
+		liveMonster = new ArrayList<>();
+		for(int i=0;i<tempLiveMonster.size();i++)
+		{
+			liveMonster.add(tempLiveMonster.get(i));
+		}
+		
+		
+		
 	}
+	
+	
 	private static void monsterCopyTry() {
 	
 		for(int i=0;i<liveMonster.size();i++)
@@ -122,30 +269,35 @@ public class Main {
 	private static void monsterMove() {
 		
 		monsterPosBoard= new int[4][4];
+		boolean flag;
 		for(Monster m : liveMonster)
 		{
 			int x= m.x;
 			int y= m.y;
 			int d= m.d;
 			
+			flag=false;
 			for(int i=d;i<d+8;i++)
 			{
 				if(i>=8)
 					i-=8;
-				
+			
 				int nx = x+dx[i];
 				int ny= y+dy[i];
-				if(isBoundary(nx, ny) && board[nx][ny]==0 && (nx!= px && ny!=py))
+				if(isBoundary(nx, ny) && board[nx][ny]==0 && !(nx== px && ny==py))
 				{
 					m.x= nx;
 					m.y = ny;
-					m.d = d;
+					m.d = i;
 					
 					monsterPosBoard[nx][ny]+=1;
-					
+					flag=true;
 					break;
 				}
 			}
+			
+			if(flag)
+				continue;
 			monsterPosBoard[x][y]+=1;
 		}
 		
