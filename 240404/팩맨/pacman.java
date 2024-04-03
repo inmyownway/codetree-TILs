@@ -82,21 +82,16 @@ public class Main {
         for(int time=0;time<T;time++)
         {
 
-           // System.out.println("tiem###");     printMonster(liveMonster);
-           // System.out.println("# "+time);
+         //   System.out.println(time);
 
-           // System.out.println("몬스터 이동 후 ");
             monsterCopyTry();
             monsterMove();
-            //printMonster(liveMonster);
+
 
 
 
             // 팩맨 이동
             packmanMove();
-            //System.out.println(px+" "+py);
-           // System.out.println("팩맨 이동 후 상황");
-           // printMonster(liveMonster);
 
 
             // 몬스터 시체 소멸
@@ -105,19 +100,6 @@ public class Main {
             // 몬스터 복제
             monsterCopyStart();
 
-          //  System.out.println("턴 끝난후 상황");
-            //printMonster(liveMonster);
-
-
-           // System.out.println(px+" "+py);
-
-       //     System.out.println("live");
-          //  printMonster(liveMonster);
-           // System.out.println("egg");
-          //  printMonster(eggMonster);
-         // //  System.out.println("dead state");
-          //  printBoard(board);
-          //  System.out.println("packamn pos :"+px+" "+py);
 
         }
         System.out.println(liveMonster.size());
@@ -149,6 +131,7 @@ public class Main {
     private static void packmanMove() {
 
         // 상 좌 하 우
+       // System.out.println("packman move start");
         int[] mx = {-1,0,1,0};
         int[] my= {0,-1,0,1};
 
@@ -310,13 +293,14 @@ public class Main {
             liveMonster.add(new Monster(tx,ty,td));
         }
 
-
+       // System.out.println("packman move end");
 
     }
 
 
     private static void monsterCopyTry() {
 
+     //   System.out.println("monsterCopy try start");
         for(int i=0;i<liveMonster.size();i++)
         {
             Monster tempMonster= liveMonster.get(i);
@@ -327,14 +311,17 @@ public class Main {
 
             eggMonster.add(new Monster(x,y,d));
         }
+      //  System.out.println("monsterCopy try end");
 
     }
     private static void monsterMove() {
 
+       // System.out.println("monsterMove start");
         monsterPosBoard= new int[4][4];
 
        // printBoard(monsterPosBoard);
         boolean flag;
+      //  System.out.println(liveMonster.size());
         for(Monster m : liveMonster)
         {
             int x= m.x;
@@ -344,16 +331,19 @@ public class Main {
             flag=false;
             for(int i=d;i<d+8;i++)
             {
+                int temp=i;
                 if(i>=8)
-                    i-=8;
+                    temp-=8;
 
-                int nx = x+dx[i];
-                int ny= y+dy[i];
+                int nx = x+dx[temp];
+                int ny= y+dy[temp];
+
+                //System.out.println(nx+" "+ny);
                 if(isBoundary(nx, ny) && board[nx][ny]==0 && !(nx== px && ny==py))
                 {
                     m.x= nx;
                     m.y = ny;
-                    m.d = i;
+                    m.d = temp;
 
                     monsterPosBoard[nx][ny]+=1;
                     flag=true;
@@ -365,6 +355,7 @@ public class Main {
                 continue;
             monsterPosBoard[x][y]+=1;
         }
+      //  System.out.println("monsterMove end");
 
     }
     public static void perm(int depth)
