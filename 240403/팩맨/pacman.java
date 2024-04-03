@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Queue;
@@ -206,11 +206,15 @@ public class Main {
         }
 
 
-        routes.sort((o1, o2) -> {
-            // TODO Auto-generated method stub
-            return Arrays.compare(o1, o2);
-        });
-
+//        routes.sort(new Comparator<int[]>() {
+//
+//            @Override
+//            public int compare(int[] o1, int[] o2) {
+//                // TODO Auto-generated method stub
+//                return Arrays.compare(o1, o2);
+//            }
+//        });
+//
 
        // System.out.println(maxEat);
 //        for(int[] a:routes)
