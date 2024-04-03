@@ -82,7 +82,7 @@ public class Main {
         for(int time=0;time<T;time++)
         {
 
-         //   System.out.println(time);
+           //System.out.println(time);
 
             monsterCopyTry();
             monsterMove();
@@ -99,7 +99,7 @@ public class Main {
 
             // 몬스터 복제
             monsterCopyStart();
-
+           //System.out.println(px+" "+py);
 
         }
         System.out.println(liveMonster.size());
@@ -153,6 +153,7 @@ public class Main {
             int ny = py;
             boolean[][] tempV =new boolean[4][4];
 
+           // System.out.println(nx+" "+ny);
             tempV[nx][ny]=true;
             boolean flag= false;
             for(int dir : move)
@@ -188,7 +189,51 @@ public class Main {
 
 
         }
+        //System.out.println("@");
        // System.out.println(maxEat);
+       // System.out.println(maxEat);
+//        System.out.println(maxEat);
+//         if (maxEat==0) return;
+//
+        //System.out.println("@");
+
+        if(maxEat==0)
+        {
+           //System.out.println("maxeat");
+            for(int[] move: moves)
+            {
+
+                int tx= px;
+                int ty= py;
+                boolean flag= false;
+                for(int dir : move)
+                {
+
+                    tx+=mx[dir];
+                    ty+=my[dir];
+                //    System.out.println(tx+" "+ty);
+                    if(!isBoundary(tx,ty)) {
+
+                     //   System.out.println("break");
+                        flag=true;
+
+                        break;
+                    }
+                }
+
+                if(flag==false)
+                {
+                    px=tx;
+                    py=ty;
+                   // System.out.println(px+" "+py);
+                    return;
+                }
+
+            }
+
+        }
+
+
 
        // System.out.println(maxEat);
         // 최대 먹이를 먹는 루트 ( 이거 나오면 sort해서 0번쨰가 조건에 맞는 루트임)
@@ -247,6 +292,8 @@ public class Main {
 
         // 몬스터 제거 ( 여기 루트에 있는 애들)
 
+
+
         int nx=px;
         int ny=py;
 
@@ -254,6 +301,8 @@ public class Main {
 
         int[][] way= new int[3][2];
         int rr=0;
+       // System.out.println(px+" "+py);
+        //System.out.println(Arrays.toString(route));
         for(int dir : route)
         {
             nx+=mx[dir];
@@ -267,6 +316,7 @@ public class Main {
         //System.out.println(nx+" "+ny);
         px=nx;
         py=ny;
+        //System.out.println(px+"@ @"+py);
         for(Monster m: liveMonster)
         {
             if(
