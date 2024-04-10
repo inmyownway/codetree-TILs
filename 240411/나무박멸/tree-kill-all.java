@@ -43,8 +43,10 @@ public class Main {
 
 
             bunsikTree();
+            //print();
             updatePoisonBoard();
             spread();
+
 
 //            print();
 //            for(int[] c: poisonBoard)
@@ -96,6 +98,7 @@ public class Main {
                             }
                         }
                     }
+
                     killCoountBoard[i][j]=sum;
 
                     maxCnt=Math.max(sum,maxCnt);
@@ -122,8 +125,10 @@ public class Main {
             if(flag)
                 break;
         }
-
-answer+=maxCnt;
+if(maxCnt==Integer.MIN_VALUE)
+    maxCnt=0;
+    answer+=maxCnt;
+//        System.out.println(answer);
         board[sx][sy]=-2;
         poisonBoard[sx][sy]=stayYear;
 
