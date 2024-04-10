@@ -53,6 +53,8 @@ public class Main {
 //            }
 
         }
+        if(answer==Integer.MAX_VALUE)
+            answer=0;
         System.out.println(answer);
     }
 
