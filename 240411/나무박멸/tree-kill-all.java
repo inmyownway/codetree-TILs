@@ -44,7 +44,7 @@ public class Main {
 
             bunsikTree();
 //            System.out.println("번식 후 ");
-          //  print();
+        //    print();
             updatePoisonBoard();
             spread();
 
@@ -107,7 +107,12 @@ public class Main {
 
             }
         }
-
+//        System.out.println("kill count");
+//        for(int[] cc: killCoountBoard)
+//        {
+//            System.out.println(Arrays.toString(cc));
+//        }
+//        System.out.println();
         boolean flag= false;
         for(int i=0;i<N;i++)
         {
@@ -126,11 +131,15 @@ public class Main {
             if(flag)
                 break;
         }
-    if(maxCnt==Integer.MIN_VALUE)
-        return;
+    if(maxCnt==Integer.MIN_VALUE) {
 
-    answer+=maxCnt;
-    //        System.out.println(answer);
+     return;
+    }
+
+        answer+=maxCnt;
+
+
+
             board[sx][sy]=-2;
             poisonBoard[sx][sy]=stayYear;
 
@@ -143,9 +152,23 @@ public class Main {
                 tx+=dx[idx];
                 ty+=dy[idx];
 
-                if(!isBoundary(tx,ty) || board[tx][ty]==-1)
+                if(!isBoundary(tx,ty) || board[tx][ty]==-1 )
                     break;
-                else
+                else if(board[tx][ty]==0)
+                {
+                    board[tx][ty]=-2;
+                    poisonBoard[tx][ty]=stayYear;
+                    break;
+                }
+                else if(board[tx][ty]==-2)
+
+                {
+                    board[tx][ty]=-2;
+                    poisonBoard[tx][ty]=stayYear;
+                    break;
+                }
+
+                else if(board[tx][ty]>=1 )
                 {
                     board[tx][ty]=-2;
                     poisonBoard[tx][ty]=stayYear;
