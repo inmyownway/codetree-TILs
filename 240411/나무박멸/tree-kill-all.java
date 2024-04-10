@@ -43,11 +43,12 @@ public class Main {
 
 
             bunsikTree();
-            //print();
+//            System.out.println("번식 후 ");
+          //  print();
             updatePoisonBoard();
             spread();
 
-
+//            System.out.println("끝난 후");
 //            print();
 //            for(int[] c: poisonBoard)
 //            {
@@ -125,12 +126,13 @@ public class Main {
             if(flag)
                 break;
         }
-if(maxCnt==Integer.MIN_VALUE)
-    maxCnt=0;
+    if(maxCnt==Integer.MIN_VALUE)
+        return;
+
     answer+=maxCnt;
-//        System.out.println(answer);
-        board[sx][sy]=-2;
-        poisonBoard[sx][sy]=stayYear;
+    //        System.out.println(answer);
+            board[sx][sy]=-2;
+            poisonBoard[sx][sy]=stayYear;
 
         for(int idx=0;idx<4;idx++)
         {
