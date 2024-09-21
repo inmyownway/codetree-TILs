@@ -100,7 +100,7 @@ public class Main {
     public static void find(int x, int y) {
 
         Queue<int[]> q = new LinkedList<>();
-        int m = sx + 1;
+        int m = -1;
 
         boolean[][] v = new boolean[R][C];
         q.add(new int[]{x, y});
