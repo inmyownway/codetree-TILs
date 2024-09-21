@@ -87,7 +87,7 @@ public class Main {
                 }
                 find(sx, sy);
             }
-
+//
 //            for (int i = 0; i < R; i++) {
 //                System.out.println(Arrays.toString(board[i]));
 //
@@ -214,7 +214,7 @@ public class Main {
     }
 
     public static boolean outOfForest() {
-        if (sx >= 0 && sx <= 2) {
+        if (sx >= 0 && sx <= 3) {
             return true;
 
         }
