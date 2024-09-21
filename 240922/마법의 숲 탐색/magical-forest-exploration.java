@@ -85,13 +85,7 @@ public class Main {
                 find(sx, sy);
             }
 
-//            for (int i = 0; i < R; i++) {
-//                System.out.println(Arrays.toString(board[i]));
-//
-//            }
-
-           // System.out.println("");
-
+          
         }
         System.out.println(answer);
 
@@ -133,7 +127,7 @@ public class Main {
             }
         }
         answer += (m - 1);
-        // System.out.println(m);
+        //System.out.println(m - 1);
     }
 
     public static boolean moveDown(int sx, int sy) {
@@ -215,12 +209,13 @@ public class Main {
             return true;
 
         }
-        if (sy == 0 && sy == C - 1)
+        if (sy == 0 && sy == C - 1) {
             return true;
+        }
         return false;
     }
 
     public static boolean isBoundaryFind(int x, int y) {
-        return x >= 2 && x < R && y >= 0 && y < C;
+        return x >= 3 && x < R && y >= 0 && y < C;
     }
 }
