@@ -90,7 +90,7 @@ public class Main {
 //
 //            }
 
-            //  System.out.println("");
+            System.out.println("");
 
         }
         System.out.println(answer);
@@ -213,7 +213,10 @@ public class Main {
     public static boolean outOfForest() {
         if (sx >= 0 && sx <= 2) {
             return true;
+
         }
+        if (sy == 0 && sy == C - 1)
+            return true;
         return false;
     }
 
