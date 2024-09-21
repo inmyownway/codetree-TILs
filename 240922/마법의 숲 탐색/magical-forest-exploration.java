@@ -15,7 +15,7 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(bf.readLine());
 
-        R = Integer.parseInt(st.nextToken()) + 2;
+        R = Integer.parseInt(st.nextToken()) + 3;
         C = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
 
@@ -26,7 +26,7 @@ public class Main {
 
             int y = Integer.parseInt(st.nextToken()) - 1;
             nd = Integer.parseInt(st.nextToken());
-            sx = 0;
+            sx = 1;
             sy = y;
 
             while (true) {
@@ -65,7 +65,10 @@ public class Main {
 
             }
             if (outOfForest()) {
-                board = new int[R + 2][C];
+                for (int i = 0; i < R; i++) {
+                    Arrays.fill(board[i], 0);
+                }
+
             } else {
                 board[sx][sy] = k;
                 board[sx - 1][sy] = k;
@@ -85,7 +88,13 @@ public class Main {
                 find(sx, sy);
             }
 
-          
+//            for (int i = 0; i < R; i++) {
+//                System.out.println(Arrays.toString(board[i]));
+//
+//            }
+//
+//            System.out.println("");
+
         }
         System.out.println(answer);
 
@@ -126,8 +135,8 @@ public class Main {
                 }
             }
         }
-        answer += (m - 1);
-        //System.out.println(m - 1);
+        answer += (m - 1 - 1);
+        // System.out.println(m - 1);
     }
 
     public static boolean moveDown(int sx, int sy) {
